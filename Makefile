@@ -123,6 +123,87 @@ OrderBook/fast:
 	$(MAKE) -f CMakeFiles/OrderBook.dir/build.make CMakeFiles/OrderBook.dir/build
 .PHONY : OrderBook/fast
 
+Config.o: Config.cpp.o
+
+.PHONY : Config.o
+
+# target to build an object file
+Config.cpp.o:
+	$(MAKE) -f CMakeFiles/OrderBook.dir/build.make CMakeFiles/OrderBook.dir/Config.cpp.o
+.PHONY : Config.cpp.o
+
+Config.i: Config.cpp.i
+
+.PHONY : Config.i
+
+# target to preprocess a source file
+Config.cpp.i:
+	$(MAKE) -f CMakeFiles/OrderBook.dir/build.make CMakeFiles/OrderBook.dir/Config.cpp.i
+.PHONY : Config.cpp.i
+
+Config.s: Config.cpp.s
+
+.PHONY : Config.s
+
+# target to generate assembly for a file
+Config.cpp.s:
+	$(MAKE) -f CMakeFiles/OrderBook.dir/build.make CMakeFiles/OrderBook.dir/Config.cpp.s
+.PHONY : Config.cpp.s
+
+OrdBook.o: OrdBook.cpp.o
+
+.PHONY : OrdBook.o
+
+# target to build an object file
+OrdBook.cpp.o:
+	$(MAKE) -f CMakeFiles/OrderBook.dir/build.make CMakeFiles/OrderBook.dir/OrdBook.cpp.o
+.PHONY : OrdBook.cpp.o
+
+OrdBook.i: OrdBook.cpp.i
+
+.PHONY : OrdBook.i
+
+# target to preprocess a source file
+OrdBook.cpp.i:
+	$(MAKE) -f CMakeFiles/OrderBook.dir/build.make CMakeFiles/OrderBook.dir/OrdBook.cpp.i
+.PHONY : OrdBook.cpp.i
+
+OrdBook.s: OrdBook.cpp.s
+
+.PHONY : OrdBook.s
+
+# target to generate assembly for a file
+OrdBook.cpp.s:
+	$(MAKE) -f CMakeFiles/OrderBook.dir/build.make CMakeFiles/OrderBook.dir/OrdBook.cpp.s
+.PHONY : OrdBook.cpp.s
+
+OrdObject.o: OrdObject.cpp.o
+
+.PHONY : OrdObject.o
+
+# target to build an object file
+OrdObject.cpp.o:
+	$(MAKE) -f CMakeFiles/OrderBook.dir/build.make CMakeFiles/OrderBook.dir/OrdObject.cpp.o
+.PHONY : OrdObject.cpp.o
+
+OrdObject.i: OrdObject.cpp.i
+
+.PHONY : OrdObject.i
+
+# target to preprocess a source file
+OrdObject.cpp.i:
+	$(MAKE) -f CMakeFiles/OrderBook.dir/build.make CMakeFiles/OrderBook.dir/OrdObject.cpp.i
+.PHONY : OrdObject.cpp.i
+
+OrdObject.s: OrdObject.cpp.s
+
+.PHONY : OrdObject.s
+
+# target to generate assembly for a file
+OrdObject.cpp.s:
+	$(MAKE) -f CMakeFiles/OrderBook.dir/build.make CMakeFiles/OrderBook.dir/OrdObject.cpp.s
+.PHONY : OrdObject.cpp.s
+
 OrderBook.o: OrderBook.cpp.o
 
 .PHONY : OrderBook.o
@@ -159,6 +240,15 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
 	@echo "... OrderBook"
+	@echo "... Config.o"
+	@echo "... Config.i"
+	@echo "... Config.s"
+	@echo "... OrdBook.o"
+	@echo "... OrdBook.i"
+	@echo "... OrdBook.s"
+	@echo "... OrdObject.o"
+	@echo "... OrdObject.i"
+	@echo "... OrdObject.s"
 	@echo "... OrderBook.o"
 	@echo "... OrderBook.i"
 	@echo "... OrderBook.s"

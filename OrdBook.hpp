@@ -10,9 +10,13 @@
 #define OrdBook_hpp
 
 #include <stdio.h>
+#include <map>
+#include <list>
+#include <string>
+#include "OrdObject.hpp"
 
 typedef std::map< int, OrdObject* > ObjMap;
-typedef std::dlist< OrdObject* > ObjList;
+typedef std::list< OrdObject* > ObjList;
 
 class OrdBook
 {
@@ -23,8 +27,8 @@ protected:
     double      m_tickSize;
     
 public:
-    OrdBook( double tickSize );
-    ~ordBook() {}
+    OrdBook( const double tickSize );
+    ~OrdBook() {}
     
     // insert an order.
     void insert( const OrdObject& order );
@@ -43,6 +47,13 @@ public:
     void printBuy() const;
     void printSell() const;
     void printAll() const;
-}
+    
+protected:
+    void moveToBack( OrdObject* order,
+                     ObjList&  list );
+    
+    bool match( OrdObject& order,
+                ObjList&   list );
+};
 
 #endif /* OrdBook_hpp */

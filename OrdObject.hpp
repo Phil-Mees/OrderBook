@@ -14,11 +14,11 @@
 class OrdObject
 {
 public:
-    enum { ORD_OPEN,
-           ORD_PART_FILLED,
-           ORD_FILLED,
-           ORD_CANCELLED
-    } OrdStatus;
+    enum OrdStatus { ORD_OPEN,
+                     ORD_PART_FILLED,
+                     ORD_FILLED,
+                     ORD_CANCELLED
+    };
     
 protected:
     int             m_orderId;
@@ -45,11 +45,17 @@ public:
     OrdStatus getStatus() const { return m_status; }
     const std::string& getStatusStr() const;
     
+    bool isBuy() const;
+    bool isSell() const;
+    
     //  Ammend the quantity
     void setQuantity( double newQuantity )
     {
         m_quantity = newQuantity;
     }
+    
+    //  Cancel the order
+    void cancel();
     
     //  match against another object
     //  returns true when the orders match
