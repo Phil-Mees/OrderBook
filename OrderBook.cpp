@@ -6,8 +6,17 @@
 //  Copyright © 2019 com.philmees. All rights reserved.
 //
 
-#include <stdio.h>
-#include <Config.hpp>
+#include <iostream>
+#include "Config.hpp"
+
+using namespace std;
+
+
+//---------- getCommands ----------
+void getCommands()
+{
+    cout << "> ";
+}
 
 //---------- help ----------
 void help()
@@ -25,7 +34,7 @@ void help()
 int main( int   argc,
           char* argv[] )
 {
-    Config::init( argc argv );
+    Config::init( argc, argv );
     
     if ( Config::getBool( "help" ) )
     {
