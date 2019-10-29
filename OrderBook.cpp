@@ -39,5 +39,9 @@ int main( int   argc,
     if ( Config::getBool( "help" ) )
     {
         help();
+        return 1;
     }
+    getCommands();
+ 
+    return 1;
 }

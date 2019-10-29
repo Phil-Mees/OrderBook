@@ -6,6 +6,7 @@
 //  Copyright © 2019 com.philmees. All rights reserved.
 //
 
+#include <iostream>
 #include "OrdObject.hpp"
 
 namespace
@@ -43,6 +44,17 @@ OrdObject::OrdObject( const OrdObject&  obj )
     m_price( obj.m_price ),
     m_status( obj.m_status )
 {
+}
+
+std::ostream& operator<<( std::ostream& os,
+                          const OrdObject& obj )
+{
+    os << obj.m_orderId << " "
+       << obj.m_orderType << " "
+       << obj.m_quantity << " "
+       << obj.m_price << " ["
+       << obj.getStatusStr() << "]" << std::endl;
+    return os;
 }
 
 //--------- getStatusStr ---------
@@ -87,8 +99,26 @@ bool OrdObject::match( const OrdObject& obj ) const
 }
 
 //---------- execute  -----------
-double execute( const OrdObject& obj )
+double OrdObject::execute( const OrdObject& obj )
 {
     
     return 0.0;
+}
+
+//--------- cancel ----------
+void OrdObject::cancel()
+{
+    m_status = ORD_CANCELLED;
+}
+
+//---------- isBuy ----------
+bool OrdObject::isBuy() const
+{
+    return m_orderType == s_buy;
+}
+
+//---------- isSell ----------
+bool OrdObject::isSell() const
+{
+    return m_orderType == s_sell;
 }

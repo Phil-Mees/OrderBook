@@ -11,6 +11,7 @@
 #include "Config.hpp"
 
 typedef std::map< std::string, std::string > ConfigMap;
+typedef std::pair< std::string, std::string > ConfigPair;
 
 namespace
 {
@@ -33,7 +34,7 @@ void Config::init( int   argc,
             else
                 i++;
         }
-        s_cfgMap.insert( param, value );
+        s_cfgMap.insert( ConfigPair(param, value) );
     }
 }
 
