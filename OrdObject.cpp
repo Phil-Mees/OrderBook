@@ -90,4 +90,5 @@ bool OrdObject::match( const OrdObject& obj ) const
 double execute( const OrdObject& obj )
 {
     
+    return 0.0;
 }

@@ -32,7 +32,7 @@ void OrdBook::insert( const OrdObject& order )
     
     //  create the order and insert into the map and list
     OrdObject* ord( new OrdObject( order ));
-    m_ordMap.insert( order.getOrderId(), ord );
+    m_ordMap.insert( ObjPair(order.getOrderId(), ord ));
     
     //  Match the order and insert into the appropriate list
     //  if not fully matched.
@@ -94,7 +94,11 @@ void OrdBook::printLevel( const std::string& orderType,
     if (orderType == "buy")
     {
         if ( m_buyList.size() < level )
-            cout << m_buyList[level];
+        {
+            ObjList::const_iterator it = std::next( m_buyList.begin(), level );
+            std::next( m_buyList.begin(), level );
+            cout << *(*it) << endl;
+        }
         else
             cout << "OrdBook::printLevel: has " << m_buyList.size()
                  << " entries" << endl;
@@ -102,7 +106,10 @@ void OrdBook::printLevel( const std::string& orderType,
     else
     {
         if ( m_sellList.size() < level )
-            cout << m_sellList[level];
+        {
+            ObjList::const_iterator it = std::next( m_sellList.begin(), level );
+            cout << *(*it) << endl;
+        }
         else
             cout << "OrdBook::printLevel: has " << m_sellList.size()
                  << " entries" << endl;
@@ -111,7 +118,7 @@ void OrdBook::printLevel( const std::string& orderType,
 
 void OrdBook::printOrder( int orderId ) const
 {
-    ObjMap::iterator ordIt = m_ordMap.find( orderId );
+    ObjMap::const_iterator ordIt = m_ordMap.find( orderId );
     if ( ordIt != m_ordMap.end() )
         cout << *ordIt->second;
     else
@@ -122,28 +129,28 @@ void OrdBook::printOrder( int orderId ) const
 
 void OrdBook::printBuy() const
 {
-    ObjList::iterator it;
+    ObjList::const_iterator it;
     for ( it = m_buyList.begin(); it != m_buyList.end(); it++ )
     {
-        cout << *it << endl;
+        cout << *(*it) << endl;
     }
 }
 
 void OrdBook::printSell() const
 {
-    ObjList::iterator it;
+    ObjList::const_iterator it;
     for ( it = m_sellList.begin(); it != m_sellList.end(); it++ )
     {
-        cout << *it << endl;
+        cout << *(*it) << endl;
     }
 }
 
 void OrdBook::printAll() const
 {
-    ObjMap::iterator it;
+    ObjMap::const_iterator it;
     for ( it = m_ordMap.begin(); it != m_ordMap.end(); it++ )
     {
-        cout << *it << endl;
+        cout << *it->second << endl;
     }
 }
 
@@ -153,13 +160,16 @@ bool OrdBook::match( OrdObject& order,
     ObjList::iterator it;
     for ( it = list.begin(); it != list.end() && order.getQuantity() > 0.0; it++ )
     {
-        if ( order.match( *it ))
+        OrdObject* ord( *it );
+        if ( order.match( *ord ))
         {
-            order.execute( *it );
-            if ( it->getQuantity() == 0.0 )
+            order.execute( *ord );
+            if ( ord->getQuantity() == 0.0 )
                 list.erase( it );
         }
     }
+    
+    return order.getQuantity() == 0.0;
 }
 
 void OrdBook::moveToBack( OrdObject* order,

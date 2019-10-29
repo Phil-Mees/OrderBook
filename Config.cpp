@@ -5,7 +5,7 @@
 //  Created by Phil Mees on 27/10/19.
 //  Copyright © 2019 com.philmees. All rights reserved.
 //
-
+#include <stdlib.h>
 #include <string>
 #include <map>
 #include "Config.hpp"
@@ -18,18 +18,18 @@ namespace
 }
 
 //---------- init ----------
-void Config::init( int   argc
-                  char* argc[] )
+void Config::init( int   argc,
+                  char*  argv[] )
 {
     for ( int i = 0; i < argc; i++ )
     {
-        std:string param( argc[i] );
+        std::string param( argv[i] );
         std::string value;
         if ( param[0] == '-' && i < argc+1 )
         {
-            value = argc[i+1];
+            value = argv[i+1];
             if ( value[0] == '-' )
-                value = 'true';
+                value = "true";
             else
                 i++;
         }
@@ -41,9 +41,9 @@ void Config::init( int   argc
 const std::string& Config::getString( const std::string& param,
                                       const std::string& defValue )
 {
-    auto value = s_cfgMap.find( param );
+    ConfigMap::iterator value = s_cfgMap.find( param );
     if ( value != s_cfgMap.end() )
-        return value.second;
+        return value->second;
     else
         return defValue;
 }
@@ -52,9 +52,9 @@ const std::string& Config::getString( const std::string& param,
 int Config::getInt( const std::string& param,
                     int                defValue )
 {
-    auto value = s_cfgMap.find( param );
+    ConfigMap::iterator value = s_cfgMap.find( param );
     if ( value != s_cfgMap.end() )
-        return atoi( value.second );
+        return atoi( value->second.c_str() );
     else
         return defValue;
 }
@@ -63,9 +63,9 @@ int Config::getInt( const std::string& param,
 bool Config::getBool( const std::string& param,
                       bool               defValue )
 {
-    auto value = s_cfgMap.find( param );
+    ConfigMap::iterator value = s_cfgMap.find( param );
     if ( value != s_cfgMap.end() )
-        return value.second == "true" || value.second == "1";
+        return value->second == "true" || value->second == "1";
     else
         return defValue;
 }

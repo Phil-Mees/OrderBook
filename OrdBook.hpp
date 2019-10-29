@@ -16,6 +16,7 @@
 #include "OrdObject.hpp"
 
 typedef std::map< int, OrdObject* > ObjMap;
+typedef std::pair< int, OrdObject* > ObjPair;
 typedef std::list< OrdObject* > ObjList;
 
 class OrdBook

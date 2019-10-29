@@ -37,6 +37,9 @@ public:
     
     ~OrdObject() {}
     
+    friend std::ostream & operator<<( std::ostream& os,
+                                      const OrdObject& obj);
+    
     //  getters
     int getOrderId() const { return m_orderId; }
     const std::string& getOrderType() const { return m_orderType; }
