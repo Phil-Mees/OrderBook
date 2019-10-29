@@ -39,12 +39,12 @@ void OrdBook::insert( const OrdObject& order )
     if ( ord->isBuy() )
     {
         if ( !match( *ord, m_sellList ) )
-            m_buyList.push_back( ord );
+            insert( ord, m_buyList );
     }
     else
     {
         if ( !match( *ord, m_buyList ) )
-            m_sellList.push_back( ord );
+            insert( ord, m_sellList );
     }
 }
 
@@ -172,9 +172,27 @@ bool OrdBook::match( OrdObject& order,
     return order.getQuantity() == 0.0;
 }
 
+//----------  insert ----------
+void OrdBook::insert( OrdObject* order,
+                      ObjList&  list )
+{
+    ObjList::iterator it;
+    for ( it = list.begin(); it != list.end(); it++ )
+    {
+        if ( (order->isBuy() && order->getPrice() < (*it)->getPrice()) ||
+             (order->isSell() && order->getPrice() > (*it)->getPrice() ))
+        {
+            list.insert( it, order );
+            return;
+        }
+    }
+    list.push_back( order );
+}
+
+//---------- moveToBack  ----------
 void OrdBook::moveToBack( OrdObject* order,
                           ObjList&  list )
 {
     list.remove( order );
-    list.push_back( order );
+    insert( order, list );
 }

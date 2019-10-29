@@ -50,6 +50,9 @@ public:
     void printAll() const;
     
 protected:
+    void insert( OrdObject* order,
+                 ObjList&   list );
+    
     void moveToBack( OrdObject* order,
                      ObjList&  list );
     

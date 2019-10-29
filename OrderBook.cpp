@@ -22,7 +22,7 @@ void help()
     cout << "  <command> <command-parameters>"
          << "  order <orderId> <buy|sell> <orderSize> <orderPrice>" << endl
          << "  cancel <orderId>" << endl
-         << "  ammend <orderId> <new-orderSize>" << endl
+         << "  amend <orderId> <new-orderSize>" << endl
          << "  q level <ask|bid> <position: 0..n>" << endl
          << "  q order <orderId>" << endl
          << "  print <buy|sell|all>" << endl;
@@ -36,7 +36,7 @@ void getCommands()
     std::string command;
 
    
-    while( command != "quit" || command != "q")
+    while( command != "quit" && command != "q")
     {
         int         orderId(0);
         std::string orderType;
