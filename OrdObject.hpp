@@ -66,7 +66,7 @@ public:
     
     //  execute and update the order accordingly
     //  returns the quantity executed
-    double execute( const OrdObject& obj );
+    double execute( OrdObject& obj );
 };
 
 #endif /* OrdObject_hpp */
