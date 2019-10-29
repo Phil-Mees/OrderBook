@@ -64,8 +64,8 @@ void OrdBook::cancel( int orderId )
 }
 
 // ammend an order's quantity
-void OrdBook::ammend( int    orderId,
-                      double newQuantity )
+void OrdBook::amend( int    orderId,
+                     double newQuantity )
 {
     ObjMap::iterator ordIt = m_ordMap.find( orderId );
     if ( ordIt != m_ordMap.end() )

@@ -38,7 +38,7 @@ public:
     void cancel( int orderId );
     
     // ammend an order's quantity
-    void ammend( int    orderId,
+    void amend( int    orderId,
                 double newQuantity );
     
     //  print an order/orders
