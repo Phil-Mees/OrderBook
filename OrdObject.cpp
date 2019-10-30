@@ -8,6 +8,12 @@
 
 #include <iostream>
 #include "OrdObject.hpp"
+#include "OrdBook.hpp"
+using namespace std;
+
+#include "OrdObject.hpp"
+
+using namespace std;
 
 namespace
 {
@@ -99,28 +105,37 @@ bool OrdObject::match( const OrdObject& obj ) const
 }
 
 //---------- execute  -----------
-double OrdObject::execute( OrdObject& obj )
+double OrdObject::execute( OrdObject* obj )
 {
-    if ( m_quantity == obj.m_quantity )
+    if ( m_quantity == obj->m_quantity )
     {
+        cout << "OrdObject::execute: filled order " << m_orderId
+             << " with " << obj->m_orderId << ": "
+             << m_quantity << " @ " << m_price << endl;
         m_quantity = 0.0;
         m_status = ORD_FILLED;
-        obj.m_quantity = 0.0;
-        obj.m_status = ORD_FILLED;
+        obj->m_quantity = 0.0;
+        obj->m_status = ORD_FILLED;
     }
-    else if ( m_quantity < obj.m_quantity )
+    else if ( m_quantity < obj->m_quantity )
     {
+        cout << "OrdObject::execute: filled order " << m_orderId
+             << " with " << obj->m_orderId << ": "
+             << m_quantity << " @ " << m_price << endl;
         m_quantity = 0.0;
-        m_status == ORD_FILLED;
-        obj.m_quantity -= m_quantity;
-        obj.m_status = ORD_PART_FILLED;
+        m_status = ORD_FILLED;
+        obj->m_quantity -= m_quantity;
+        obj->m_status = ORD_PART_FILLED;
     }
     else
     {
-        m_quantity -= obj.m_quantity;
-        m_status == ORD_PART_FILLED;
-        obj.m_quantity = 0.0;
-        obj.m_status = ORD_FILLED;
+        cout << "OrdObject::execute: partially filled order " << m_orderId
+             << " with " << obj->m_orderId << ": "
+             << obj->m_quantity << " @ " << obj->m_price << endl;
+        m_quantity -= obj->m_quantity;
+        m_status = ORD_PART_FILLED;
+        obj->m_quantity = 0.0;
+        obj->m_status = ORD_FILLED;
     }
     return m_quantity;
 }

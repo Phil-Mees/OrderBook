@@ -19,6 +19,7 @@ OrdBook::OrdBook( const double tickSize )
 // insert an order.
 void OrdBook::insert( const OrdObject& order )
 {
+    cout << "OrdBook::insert: Request to insert " << order << endl;
     //  check the tick price
     // TDB
     
@@ -39,12 +40,18 @@ void OrdBook::insert( const OrdObject& order )
     if ( ord->isBuy() )
     {
         if ( !match( *ord, m_sellList ) )
+        {
             insert( ord, m_buyList );
+            cout << "OrdBook::insert: inserted in buy-list: " << *ord << endl;
+        }
     }
     else
     {
         if ( !match( *ord, m_buyList ) )
+        {
             insert( ord, m_sellList );
+            cout << "OrdBook::insert: inserted in sell-list: " << *ord << endl;
+        }
     }
 }
 
@@ -55,6 +62,9 @@ void OrdBook::cancel( int orderId )
     if ( ordIt != m_ordMap.end() )
     {
         ordIt->second->cancel();
+        m_buyList.remove( ordIt->second );
+        m_sellList.remove( ordIt->second );
+        cout << "OrdBook::cancel: cancelled: " << ordIt->second << endl;
     }
     else
     {
@@ -70,6 +80,7 @@ void OrdBook::amend( int    orderId,
     ObjMap::iterator ordIt = m_ordMap.find( orderId );
     if ( ordIt != m_ordMap.end() )
     {
+        cout << "OrdBook::amend: amended " << ordIt->second << " -> ";
         double quantity( ordIt->second->getQuantity() );
         ordIt->second->setQuantity( newQuantity );
         if ( quantity < newQuantity )
@@ -79,10 +90,12 @@ void OrdBook::amend( int    orderId,
             else
                 moveToBack( ordIt->second, m_sellList );
         }
+        cout << ordIt->second << endl;
+
     }
     else
     {
-        cout << "OrdBook::ammend: orderId " << orderId
+        cout << "OrdBook::amend: orderId " << orderId
              << " not found " << endl;
     }
 }
@@ -164,7 +177,7 @@ bool OrdBook::match( OrdObject& order,
         OrdObject* ord( *it );
         if ( order.match( *ord ))
         {
-            order.execute( *ord );
+            order.execute( ord );
             if ( ord->getQuantity() == 0.0 )
                 list.erase( it );
         }

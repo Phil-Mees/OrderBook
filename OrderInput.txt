@@ -1,0 +1,7 @@
+order 1000 buy 100 20
+order 1001 sell 100 20
+order 1002 buy 50 20
+order 1003 sell 100 20
+print all
+quit
+
